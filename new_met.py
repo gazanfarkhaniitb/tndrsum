@@ -67,7 +67,7 @@ def generate_embeddings_for_chunks(chunks):
     return np.array(embeddings)
 
 def extract_information_with_openai(text_chunk, prompt):
-    response = openai.ChatCompletion.create(
+    response = openai.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
