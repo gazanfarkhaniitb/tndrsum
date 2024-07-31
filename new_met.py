@@ -75,7 +75,7 @@ def extract_information_with_openai(text_chunk, prompt):
         ],
         max_tokens=500  # Adjusting max tokens to handle the output size
     )
-    return response.choices[0]['message']['content'].strip()
+    return response.choices[0].message.content.strip()
 
 def generate_summary_and_extract_info(chunks):
     summary_prompt = "I am a contractor and want to know if I can bid for this project or not. So please generate a 500-word technical summary of the project from the following text. The summary should include the name of the project, location of the project site, and important dates (start, end, other key dates) of the project. Make sure to give information in concise points."
