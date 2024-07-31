@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Set your OpenAI API key
-openai.api_key = os.getenv("OPENAI_API_KEY")
+client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def extract_text_from_pdf(pdf_path):
     """Load PDF and extract text."""
@@ -52,7 +52,7 @@ def split_text(text, max_tokens=3000):
 
 def get_embedding(text, model="text-embedding-ada-002"):
     """Generate embeddings for the given text using OpenAI's API."""
-    response = openai.Embedding.create(
+    response = client.embeddings.create(
         input=text,
         model=model
     )
@@ -67,7 +67,7 @@ def generate_embeddings_for_chunks(chunks):
     return np.array(embeddings)
 
 def extract_information_with_openai(text_chunk, prompt):
-    response = openai.chat.completions.create(
+    response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
